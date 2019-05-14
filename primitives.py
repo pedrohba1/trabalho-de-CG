@@ -180,11 +180,15 @@ def quadrado(window, x1, x2, y1, y2, color):
                 window, x1 - distancia, y1, x1 - distancia, y1 - distancia, color)
             bresenham(
                 window, x1, y1 - distancia, x1 - distancia, y1 - distancia, color)
+<<<<<<< HEAD
 
 
 
 
 
+=======
+           
+>>>>>>> bc37e9774d43661e5e90ce87ec9648dfbb1f79e0
 def bezier(window, p1, p2, p3, color):
 
     for t in numpy.arange(0, 1, 0.005):
