@@ -48,6 +48,7 @@ quadrado(window, 50, 50, 150, 200, black)
 quadrado(window, 10, 40, 160, 180, black)
 # círculo
 quadrado(window, 50, 50, 200, 250, black)
+circulo(window,24,325,17,black)
 # spline ou bezier
 quadrado(window, 50, 50, 250, 300, black)
 bezier(window,(10,210),(20,240),(45,240),black)
