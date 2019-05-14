@@ -13,7 +13,7 @@ def retangulo(window, x1, y1, x2, y2, color):
     bresenham(window, x2, y1, x2, y2, color)
 
 
-def bresenham(window, x1, y1, x2, y2, color):
+def bresenham(screen, x1, y1, x2, y2, color):
 
     if x2 >= x1:
         dx = (x2-x1)  # estabelecimento do modulo de dx
@@ -30,21 +30,22 @@ def bresenham(window, x1, y1, x2, y2, color):
         incy = -1  # de cima para baixo
     x = x1
     y = y1
-    window.set_at((x1, y1), color)
+    screen.set_at((x1, y1), color)
+
     if dx == 0:
         if incy > 0:
             for y in range(y1, y2):  # Nao tenho ctz
-                window.set_at((x, y), color)
+                screen.set_at((x, y), color)
         else:
             for y in range(y2, y1):
-                window.set_at((x, y), color)
+                screen.set_at((x, y), color)
     elif dy == 0:
         if incx > 0:
             for x in range(x1, x2):
-                window.set_at((x, y), color)
+                screen.set_at((x, y), color)
         else:
             for x in range(x2, x1):
-                window.set_at((x, y), color)
+                screen.set_at((x, y), color)
     else:
         if dx >= dy:
             d = (2*dy-dx)
@@ -58,7 +59,7 @@ def bresenham(window, x1, y1, x2, y2, color):
                     d = d+incNE
                     x = x+incx
                     y = y+incy
-                window.set_at((x, y), color)
+                screen.set_at((x, y), color)
         else:
             d = (2*dx-dy)
             incE = 2*dx
@@ -71,7 +72,7 @@ def bresenham(window, x1, y1, x2, y2, color):
                     d = d+incNE
                     y = y+incy
                     x = x+incx
-                window.set_at((x, y), color)
+                screen.set_at((x, y), color)
 
 
 def quadrado(window, x1, x2, y1, y2, color):

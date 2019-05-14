@@ -3,10 +3,6 @@ import sys
 import math
 import primitives
 from primitives import *
-from pynput.mouse import Listener
-from pynput.keyboard import Key, Listener
-from pynput import mouse
-from threading import Thread
 
 
 screen_size = (800, 600)
@@ -32,6 +28,7 @@ start = (0, 0)
 
 primitiva = 0
 # interface:
+
 bresenham(window, 50, 50, 800, 50, black)
 bresenham(window, 50, 50, 50, 600, black)
 
@@ -39,10 +36,13 @@ bresenham(window, 50, 50, 50, 600, black)
 # para as primitivas
 # linha
 quadrado(window, 50, 50, 50, 100, black)
+bresenham(window, 10, 60, 40, 90, black)
 # retângulo
 quadrado(window, 50, 50, 100, 150, black)
+retangulo(window, 10, 120, 40, 140, black)
 # quadrado
 quadrado(window, 50, 50, 150, 200, black)
+quadrado(window, 10, 40, 160, 180, black)
 # círculo
 quadrado(window, 50, 50, 200, 250, black)
 # spline ou bezier
@@ -52,6 +52,7 @@ quadrado(window, 50, 50, 300, 350, black)
 
 #
 pygame.display.flip()
+
 
 # try
 while 1:
