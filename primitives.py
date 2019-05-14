@@ -26,7 +26,7 @@ def circulo(screen,x0, y0, r, color):
             d = d + 2 * ( x - y ) + 5
             y = y - 1
         x = x + 1
-        _circulo(x, y, x0, y0, color, overlay)
+        _circulo(x, y, x0, y0, color, screen)
     pygame.display.flip()
     
 
