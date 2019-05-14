@@ -29,6 +29,11 @@ primitiva = 0
 
 bresenham(window, 50, 50, 800, 50, black)
 bresenham(window, 50, 50, 50, 600, black)
+#Moldura da janela
+bresenham(window,0,0,0,600,black)
+bresenham(window,0,0,800,0,black)
+bresenham(window,800,0,800,600,black)
+bresenham(window,0,600,800,600,black)
 
 
 # para as primitivas
@@ -45,8 +50,13 @@ quadrado(window, 10, 40, 160, 180, black)
 quadrado(window, 50, 50, 200, 250, black)
 # spline ou bezier
 quadrado(window, 50, 50, 250, 300, black)
+bezier(window,(10,210),(20,240),(45,240),black)
 # polilinha
 quadrado(window, 50, 50, 300, 350, black)
+bresenham(window,10,260,20,280,black)
+bresenham(window,20,280,30,260,black)
+bresenham(window,30,260,40,280,black)
+
 
 #
 pygame.display.flip()
