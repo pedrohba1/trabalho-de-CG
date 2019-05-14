@@ -13,6 +13,35 @@ def retangulo(window, x1, y1, x2, y2, color):
     bresenham(window, x2, y1, x2, y2, color)
 
 
+
+def circulo(screen,x0, y0, r, color):
+    x = 0
+    y = r
+    d = 1 - r
+    _circulo (x, y, x0, y0, color, screen)
+    while y > x :
+        if d < 0 :
+            d = d + ( 2 * x ) + 3
+        else:
+            d = d + 2 * ( x - y ) + 5
+            y = y - 1
+        x = x + 1
+        _circulo(x, y, x0, y0, color, overlay)
+    pygame.display.flip()
+    
+
+def _circulo(x, y, x0, y0, color, overlay):
+    overlay.set_at((x + x0, y + y0), color)
+    overlay.set_at((x0 - y, x + y0), color)
+    overlay.set_at((x0 - y, y0 - x), color)
+    overlay.set_at((x0 - x, y0 - y), color)
+    overlay.set_at((x0 - x, y + y0), color)
+    overlay.set_at((x + x0, y0 - y), color)
+    overlay.set_at((y + x0, y0 - x), color)
+    overlay.set_at((y + x0, x + y0), color)
+
+
+
 def bresenham(screen, x1, y1, x2, y2, color):
 
     if x2 >= x1:

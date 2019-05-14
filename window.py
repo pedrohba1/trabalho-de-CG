@@ -1,7 +1,6 @@
 import pygame
 import sys
 import math
-import primitives
 from primitives import *
 
 
@@ -13,20 +12,19 @@ foreground = black
 
 pygame.init()
 window = pygame.display.set_mode(screen_size)
-layer = pygame.surface.Surface(screen_size)
-layer.blit(window, (0, 0))
 
 pygame.display.set_caption('Trabalho computacao grafica')
 window.fill(background)
-layer.fill(white)
 pygame.display.flip()
 
 # Variaveis de controle
 clicked = False
 start = (0, 0)
 
-
+# primitiva escolhida atual:
 primitiva = 0
+
+
 # interface:
 
 bresenham(window, 50, 50, 800, 50, black)
