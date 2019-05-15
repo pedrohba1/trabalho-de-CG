@@ -14,24 +14,24 @@ def retangulo(window, x1, y1, x2, y2, color):
     bresenham(window, x2, y1, x2, y2, color)
 
 
-
-def circulo(screen,x0, y0, r, color):
+def circulo(screen, x0, y0, r, color):
     x = 0
     y = r
     d = 1 - r
-    _circulo (x, y, x0, y0, color, screen)
-    while y > x :
-        if d < 0 :
-            d = d + ( 2 * x ) + 3
+    desecirculo(x, y, x0, y0, color, screen)
+    while y > x:
+        if d < 0:
+            d = d + (2 * x) + 3
         else:
-            d = d + 2 * ( x - y ) + 5
+            d = d + 2 * (x - y) + 5
             y = y - 1
         x = x + 1
-        _circulo(x, y, x0, y0, color, screen)
+        desecirculo(x, y, x0, y0, color, screen)
     pygame.display.flip()
-    
 
-def _circulo(x, y, x0, y0, color, overlay):
+
+
+def desecirculo(x, y, x0, y0, color, overlay):
     overlay.set_at((x + x0, y + y0), color)
     overlay.set_at((x0 - y, x + y0), color)
     overlay.set_at((x0 - y, y0 - x), color)
@@ -40,7 +40,6 @@ def _circulo(x, y, x0, y0, color, overlay):
     overlay.set_at((x + x0, y0 - y), color)
     overlay.set_at((y + x0, y0 - x), color)
     overlay.set_at((y + x0, x + y0), color)
-
 
 
 def bresenham(screen, x1, y1, x2, y2, color):
@@ -62,20 +61,25 @@ def bresenham(screen, x1, y1, x2, y2, color):
     y = y1
     screen.set_at((x1, y1), color)
 
+
     if dx == 0:
         if incy > 0:
             for y in range(y1, y2):  # Nao tenho ctz
                 screen.set_at((x, y), color)
+
         else:
             for y in range(y2, y1):
                 screen.set_at((x, y), color)
+
     elif dy == 0:
         if incx > 0:
             for x in range(x1, x2):
                 screen.set_at((x, y), color)
+
         else:
             for x in range(x2, x1):
                 screen.set_at((x, y), color)
+
     else:
         if dx >= dy:
             d = (2*dy-dx)
@@ -90,6 +94,7 @@ def bresenham(screen, x1, y1, x2, y2, color):
                     x = x+incx
                     y = y+incy
                 screen.set_at((x, y), color)
+
         else:
             d = (2*dx-dy)
             incE = 2*dx
@@ -103,6 +108,7 @@ def bresenham(screen, x1, y1, x2, y2, color):
                     y = y+incy
                     x = x+incx
                 screen.set_at((x, y), color)
+
 
 
 def quadrado(window, x1, x2, y1, y2, color):
@@ -180,15 +186,8 @@ def quadrado(window, x1, x2, y1, y2, color):
                 window, x1 - distancia, y1, x1 - distancia, y1 - distancia, color)
             bresenham(
                 window, x1, y1 - distancia, x1 - distancia, y1 - distancia, color)
-<<<<<<< HEAD
 
 
-
-
-
-=======
-           
->>>>>>> bc37e9774d43661e5e90ce87ec9648dfbb1f79e0
 def bezier(window, p1, p2, p3, color):
 
     for t in numpy.arange(0, 1, 0.005):
@@ -197,8 +196,10 @@ def bezier(window, p1, p2, p3, color):
         omt3 = omt2 * omt
         t2 = t * t
         t3 = t2 * t
-        x = omt3 * p1[0] + ((3 * omt2) * t * p1[0]) + (3 * omt * t2 * p2[0]) + t3 * p3[0]
-        y = omt3 * p1[1] + ((3 * omt2) * t * p1[1]) + (3 * omt * t2 * p2[1]) + t3 * p3[1]
+        x = omt3 * p1[0] + ((3 * omt2) * t * p1[0]) + \
+            (3 * omt * t2 * p2[0]) + t3 * p3[0]
+        y = omt3 * p1[1] + ((3 * omt2) * t * p1[1]) + \
+            (3 * omt * t2 * p2[1]) + t3 * p3[1]
         x = int(numpy.floor(x))
         y = int(numpy.floor(y))
 
