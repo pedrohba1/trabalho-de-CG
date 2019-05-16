@@ -6,6 +6,42 @@ import time
 
 screen_size = (800, 600)
 
+
+def preenche(x, y, novaCor):
+    global primitiva
+    noPosition = True
+    while noPosition:
+        for e in pygame.event.get():
+            if (e.type == pygame.MOUSEBUTTONDOWN):
+                x,y =  pygame.mouse.get_pos()
+                noPosition = False
+                break
+
+    pilha = [(x, y)]
+    corOriginal = window.get_at((x, y))  # cor de fundo original
+
+
+    if y >50:
+        primitiva = 0 #serve pra evitar um monte de clique e freezar o bagulho todo
+        while len(pilha) > 0:
+            x, y = pilha.pop()
+            if window.get_at((x, y)) != corOriginal:
+                continue
+            print("(", x, ",", y, ")")
+            window.set_at((x, y), novaCor)
+            # pygame.display.update()
+            if ((x + 1) <= 799):
+                pilha.append((x + 1, y))  # poe o pixel da direita na pilha para ser preenchido
+            if ((x - 1) >= 0):
+                pilha.append((x - 1, y))  # poe o pixel da esquerda na pilha para ser preenchido
+            if ((y + 1) <= 599):
+                pilha.append((x, y + 1))  # poe o pixel de baixo na pilha para ser preenchido
+            if ((y - 1) >= 50):
+                pilha.append((x, y - 1))  # poe o pixel de cima na pilha para ser preenchido
+
+
+
+
 # Variaveis de estilo
 background = white
 foreground = black
@@ -17,19 +53,11 @@ pygame.display.set_caption('Trabalho computacao grafica')
 window.fill(background)
 pygame.display.flip()
 
-
-# Variaveis de controle
-clicked = False
-start = (0, 0)
-
 # primitiva escolhida atual:
 primitiva = 0
 
-
 # interface:
-
 bresenham(window, 0, 50, 800, 50, black)
-
 
 # Moldura da janela
 bresenham(window, 0, 0, 0, 600, black)
@@ -39,29 +67,40 @@ bresenham(window, 0, 600, 800, 600, black)
 
 
 # para as primitivas
-
-#retangulo(window,x1,y1,x2,y2,color)
+#retangulo()x1y1x2y2
 # linha
 retangulo(window ,0,25,25,50,black)
+bresenham(window,10, 29,18,48,black)
+
 # retângulo
 retangulo(window ,25,25,50,50,black)
+retangulo(window ,30,30,40,45,black)
+
 
 
 # quadrado
 retangulo(window ,50,25,75,50,black)
+retangulo(window ,60,30,70,40,black)
 
 # círculo
 retangulo(window ,75,25,100,50,black)
+circulo(window,87,37,10,black)
 
-# spline ou bezier
+#bezier
 retangulo(window ,100,25,125,50,black)
-
+p1 = (110,29)
+p2 = (118,48)
+p3 = (110,48)
+bezier(window,p1,p2,p3,black)
 # polilinha
 retangulo(window ,125,25,150,50,black)
+bresenham(window,135,29,143,48,black)
+bresenham(window,143,48, 128, 29,black)
 
 #preencher
 retangulo(window ,150,25,175,50,black)
-
+retangulo(window,160,35,170,50,black)
+bresenham(window,170,35,173,26,black)
 #cores: 
 
 #observção: nos números em parênteses, os primeiros dois são a posição do primeiro ponto
@@ -173,8 +212,6 @@ def desenha_retangulo(x1,y1):
             if event.type == pygame.MOUSEBUTTONUP:
                 print('saindo')
                 return
-
-
 
 
 def linha_to_poli(x1,y1):
@@ -322,40 +359,6 @@ def muda_botao(x,y):
     #15
     if (x>375 and x <400) and (y>0 and y<25):
         colorAtual =(166, 70, 62)
-
-
-def preenche(x, y, novaCor):
-    global primitiva
-    noPosition = True
-    while noPosition:
-        for e in pygame.event.get():
-            if (e.type == pygame.MOUSEBUTTONDOWN):
-                x,y =  pygame.mouse.get_pos()
-                noPosition = False
-                break
-
-    pilha = [(x, y)]
-    corOriginal = window.get_at((x, y))  # cor de fundo original
-
-
-    if y >50:
-        primitiva = 0 #serve pra evitar um monte de clique e freezar o bagulho todo
-        while len(pilha) > 0:
-            x, y = pilha.pop()
-            if window.get_at((x, y)) != corOriginal:
-                continue
-            print("(", x, ",", y, ")")
-            window.set_at((x, y), novaCor)
-            # pygame.display.update()
-            if ((x + 1) <= 799):
-                pilha.append((x + 1, y))  # poe o pixel da direita na pilha para ser preenchido
-            if ((x - 1) >= 0):
-                pilha.append((x - 1, y))  # poe o pixel da esquerda na pilha para ser preenchido
-            if ((y + 1) <= 599):
-                pilha.append((x, y + 1))  # poe o pixel de baixo na pilha para ser preenchido
-            if ((y - 1) >= 50):
-                pilha.append((x, y - 1))  # poe o pixel de cima na pilha para ser preenchido
-
 
 
 

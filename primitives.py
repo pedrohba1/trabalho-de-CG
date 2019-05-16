@@ -7,6 +7,7 @@ white = (255, 255, 255)
 black = (0, 0, 0)
 
 
+
 def retangulo(window, x1, y1, x2, y2, color):
     bresenham(window, x1, y1, x2, y1, color)
     bresenham(window, x1, y1, x1, y2, color)
