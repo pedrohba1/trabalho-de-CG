@@ -269,6 +269,10 @@ def muda_botao(x,y):
         print('mudando para bezier')
         primitiva = 6
 
+    if(x>150 and x<175) and (y>25 and y<50):
+        print('mudando para bezier')
+        primitiva = 7
+
     #0
     if (x>0 and x <25) and (y>0 and y<25):
         colorAtual = black
@@ -287,38 +291,71 @@ def muda_botao(x,y):
         colorAtual = (255, 0,  0)
     #5
     if (x>125 and x <150) and (y>0 and y<25):
-        colorAtual =  (255, 0, 0)
-    
+        colorAtual =  (0, 255, 0)
     #6
     if (x>150 and x <175) and (y>0 and y<25):
-        colorAtual =  (0, 255, 0)
+        colorAtual =  (255, 105, 180)
     #7
     if (x>175 and x <200) and (y>0 and y<25):
-        colorAtual = (255, 105, 180)
-    #8  
-    if (x>200 and x <225) and (y>0 and y<25):
         colorAtual =  (255, 140, 0)
+    #8
+    if (x>200 and x <225) and (y>0 and y<25):
+        colorAtual =   (0, 191, 255)
     #9
     if (x>225 and x <250) and (y>0 and y<25):
-        colorAtual =  (0, 191, 255)
+        colorAtual =  (255, 191, 0)
     #10
     if (x>250 and x <275) and (y>0 and y<25):
-        colorAtual =  (255, 191, 0)
+        colorAtual =  (128, 0, 0)
     #11
     if (x>275 and x <300) and (y>0 and y<25):
-        colorAtual =  (255, 191, 0)
+        colorAtual = (138, 0, 138)
     #12
     if (x>300 and x <325) and (y>0 and y<25):
-        colorAtual =  (128, 0, 0)
+        colorAtual =  (80, 200, 120)
     #13 
     if (x>325 and x <350) and (y>0 and y<25):
-        colorAtual =  (128, 0, 0)
+        colorAtual = (190, 91, 89)
     #14 
     if (x>350 and x <375) and (y>0 and y<25):
-        colorAtual = (138, 0, 138)
+        colorAtual = (0, 139, 139)
     #15
     if (x>375 and x <400) and (y>0 and y<25):
-        colorAtual = (190, 91, 89) 
+        colorAtual =(166, 70, 62)
+
+
+def preenche(x, y, novaCor):
+    global primitiva
+    noPosition = True
+    while noPosition:
+        for e in pygame.event.get():
+            if (e.type == pygame.MOUSEBUTTONDOWN):
+                x,y =  pygame.mouse.get_pos()
+                noPosition = False
+                break
+
+    pilha = [(x, y)]
+    corOriginal = window.get_at((x, y))  # cor de fundo original
+
+
+    if y >50:
+        primitiva = 0 #serve pra evitar um monte de clique e freezar o bagulho todo
+        while len(pilha) > 0:
+            x, y = pilha.pop()
+            if window.get_at((x, y)) != corOriginal:
+                continue
+            print("(", x, ",", y, ")")
+            window.set_at((x, y), novaCor)
+            # pygame.display.update()
+            if ((x + 1) <= 799):
+                pilha.append((x + 1, y))  # poe o pixel da direita na pilha para ser preenchido
+            if ((x - 1) >= 0):
+                pilha.append((x - 1, y))  # poe o pixel da esquerda na pilha para ser preenchido
+            if ((y + 1) <= 599):
+                pilha.append((x, y + 1))  # poe o pixel de baixo na pilha para ser preenchido
+            if ((y - 1) >= 50):
+                pilha.append((x, y - 1))  # poe o pixel de cima na pilha para ser preenchido
+
 
 
 
@@ -353,7 +390,8 @@ def click_handle(x,y):
     if(primitiva ==6):
         desenha_bezier(x,y)
 
-
+    if(primitiva == 7):
+        preenche(x,y,colorAtual)
 
 
 while 1:
