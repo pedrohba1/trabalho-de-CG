@@ -74,7 +74,7 @@ pygame.draw.rect(window, (169, 169, 169), (25,0, 25, 25))
 # Cor 2
 pygame.draw.rect(window, (0, 0, 255), (50, 0, 25, 25))
  #Cor 3
-pygame.draw.rect(window, (255, 255, 0), (75, 0, 25, 25))
+pygame.draw.rect(window,(255, 255,  0), (75, 0, 25, 25))
 # Cor 4
 pygame.draw.rect(window, (255, 0, 0), (100, 0, 25, 25))
 # Cor 5
@@ -177,14 +177,76 @@ def desenha_retangulo(x1,y1):
 
 
 
+def linha_to_poli(x1,y1):
+    fundo_padrao = window.copy()
+
+    print("aqui desenahndo")
+    while 1: 
+        for event in pygame.event.get():
+            x2,y2 = pygame.mouse.get_pos()
+            print('antes do if')
+            window.blit(fundo_padrao,(0,0))
+            bresenham(window, x1, y1, x2, y2, colorAtual)
+            window.blit(fundo_padrao, (0, 0), (0, 0, 800, 50))
+            if event.type == pygame.MOUSEBUTTONDOWN:
+                pygame.display.update()
+                fundo_padrao = window.copy()
+                (x1,y1) = (x2,y2)
+                click_direito = pygame.mouse.get_pressed()
+                
+                if click_direito[2] ==1:
+                    print('saindo')
+                    return
+
+
+def desenha_poli(x1,y1):
+    while 1:
+        for e in pygame.event.get():
+            if (e.type == pygame.MOUSEBUTTONDOWN):
+                x1,y1 = pygame.mouse.get_pos()
+                linha_to_poli(x1,y1)
+                return
+
+
+def desenha_bezier(x1,y1):
+    fundo_padrao = window.copy()
+
+    noPosition = True
+    while noPosition:
+        for e in pygame.event.get():
+            if (e.type == pygame.MOUSEBUTTONDOWN):
+                pos1= pygame.mouse.get_pos()
+                noPosition = False
+                break
+
+    noPosition = True
+    while noPosition:
+        for e in pygame.event.get():
+            if (e.type == pygame.MOUSEBUTTONDOWN):
+                pos2= pygame.mouse.get_pos()
+                noPosition = False
+                break
+    
+    noPosition = True
+    while noPosition:
+        for e in pygame.event.get():
+            if (e.type == pygame.MOUSEBUTTONDOWN):
+                pos3 = pygame.mouse.get_pos()
+                window.blit(fundo_padrao,(0,0))
+                bezier(window,pos1,pos2,pos3,colorAtual)
+                window.blit(fundo_padrao, (0, 0), (0, 0, 800, 50))
+                return
+
+
 
 
 
 def muda_botao(x,y):
     global primitiva
+    global colorAtual
+
     if (x>0 and x <25) and (y>25 and y<50):
         print('mudado pra linha')
-        
         primitiva = 1
     
     if(x>25 and x<50) and (y>25 and y<50):
@@ -196,8 +258,67 @@ def muda_botao(x,y):
         primitiva = 3
 
     if(x>75 and x<100) and (y>25 and y<50):
-        print('mudando para retangulo')
+        print('mudando para circulo')
         primitiva = 4
+
+    if(x>100 and x<125) and (y>25 and y<50):
+        print('mudando para polilinha')
+        primitiva = 5
+
+    if(x>125 and x<150) and (y>25 and y<50):
+        print('mudando para bezier')
+        primitiva = 6
+
+    #0
+    if (x>0 and x <25) and (y>0 and y<25):
+        colorAtual = black
+    #1
+    if (x>25 and x <50) and (y>0 and y<25):
+        colorAtual = (169, 169, 169)
+    #2  
+    if (x>50 and x <75) and (y>0 and y<25):
+        colorAtual = (0, 0, 255)
+    #3
+    if (x>75 and x <100) and (y>0 and y<25):
+        colorAtual = (255, 255,  0)
+    
+    #4
+    if (x>100 and x <125) and (y>0 and y<25):
+        colorAtual = (255, 0,  0)
+    #5
+    if (x>125 and x <150) and (y>0 and y<25):
+        colorAtual =  (255, 0, 0)
+    
+    #6
+    if (x>150 and x <175) and (y>0 and y<25):
+        colorAtual =  (0, 255, 0)
+    #7
+    if (x>175 and x <200) and (y>0 and y<25):
+        colorAtual = (255, 105, 180)
+    #8  
+    if (x>200 and x <225) and (y>0 and y<25):
+        colorAtual =  (255, 140, 0)
+    #9
+    if (x>225 and x <250) and (y>0 and y<25):
+        colorAtual =  (0, 191, 255)
+    #10
+    if (x>250 and x <275) and (y>0 and y<25):
+        colorAtual =  (255, 191, 0)
+    #11
+    if (x>275 and x <300) and (y>0 and y<25):
+        colorAtual =  (255, 191, 0)
+    #12
+    if (x>300 and x <325) and (y>0 and y<25):
+        colorAtual =  (128, 0, 0)
+    #13 
+    if (x>325 and x <350) and (y>0 and y<25):
+        colorAtual =  (128, 0, 0)
+    #14 
+    if (x>350 and x <375) and (y>0 and y<25):
+        colorAtual = (138, 0, 138)
+    #15
+    if (x>375 and x <400) and (y>0 and y<25):
+        colorAtual = (190, 91, 89) 
 
 
 
@@ -222,11 +343,15 @@ def click_handle(x,y):
 
     if(primitiva ==3):
         desenha_retangulo(x,y)
-        
-
 
     if(primitiva ==4):
         dsesenha_circulo(x,y)
+
+    if(primitiva ==5):
+        desenha_poli(x,y)
+    
+    if(primitiva ==6):
+        desenha_bezier(x,y)
 
 
 
