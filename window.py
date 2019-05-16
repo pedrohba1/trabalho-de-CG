@@ -288,11 +288,11 @@ def muda_botao(x,y):
     
     if(x>25 and x<50) and (y>25 and y<50):
         print('mudando para quadrado')
-        primitiva = 2
+        primitiva = 3
 
     if(x>50 and x<75) and (y>25 and y<50):
         print('mudando para retangulo')
-        primitiva = 3
+        primitiva = 2
 
     if(x>75 and x<100) and (y>25 and y<50):
         print('mudando para circulo')
@@ -300,14 +300,14 @@ def muda_botao(x,y):
 
     if(x>100 and x<125) and (y>25 and y<50):
         print('mudando para polilinha')
-        primitiva = 5
+        primitiva = 6
 
     if(x>125 and x<150) and (y>25 and y<50):
         print('mudando para bezier')
-        primitiva = 6
+        primitiva = 5
 
     if(x>150 and x<175) and (y>25 and y<50):
-        print('mudando para bezier')
+        print('mudando pra preenchimento')
         primitiva = 7
 
     #0
