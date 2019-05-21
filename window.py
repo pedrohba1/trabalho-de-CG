@@ -133,11 +133,11 @@ pygame.draw.rect(window, (138, 0, 138), (275, 0, 25, 25))
 # Cor 12
 pygame.draw.rect(window, (80, 200, 120), (300, 0, 25, 25))
 # Cor 13
-pygame.draw.rect(window, (190, 91, 89), (325, 0, 25, 25))
+pygame.draw.rect(window, (190, 91, 250), (325, 0, 25, 25))
 # Cor 14
-pygame.draw.rect(window, (0, 139, 139), (350, 0, 25, 25))
+pygame.draw.rect(window,  (0, 60, 139), (350, 0, 25, 25))
 # Cor 15
-pygame.draw.rect(window, (166, 70, 62), (375, 0, 25, 25))
+pygame.draw.rect(window, (166, 220, 62), (375, 0, 25, 25))
 
 
 
@@ -352,13 +352,13 @@ def muda_botao(x,y):
         colorAtual =  (80, 200, 120)
     #13 
     if (x>325 and x <350) and (y>0 and y<25):
-        colorAtual = (190, 91, 89)
+        colorAtual = (190, 91, 250)
     #14 
     if (x>350 and x <375) and (y>0 and y<25):
-        colorAtual = (0, 139, 139)
+        colorAtual = (0, 60, 139)
     #15
     if (x>375 and x <400) and (y>0 and y<25):
-        colorAtual =(166, 70, 62)
+        colorAtual =(166, 220, 62)
 
 
 
